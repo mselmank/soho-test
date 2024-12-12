@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetch } from "expo/fetch";
+import SessionStorage from "react-native-session-storage";
 
 interface RegisterData {
   email: string;
@@ -23,7 +24,7 @@ interface RegisterData {
 }
 
 interface RegisterResponse extends RegisterData {
-  id: number;
+  token: number;
 }
 
 interface UseRegisterResult {
@@ -59,6 +60,9 @@ const useRegister = (): UseRegisterResult => {
 
       const data = (await response.json()) as RegisterResponse;
       setUser(data);
+      if (data.token) {
+        SessionStorage.setItem("@userToken", data.token);
+      }
     } catch (error: unknown) {
       console.error("Error al registrar usuario:", error);
       if (error instanceof Error) {

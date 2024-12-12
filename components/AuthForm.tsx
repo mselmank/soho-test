@@ -42,9 +42,9 @@ const LoginForm: React.FC<AuthFormProps> = ({ onSubmit, onRegister }) => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar sesión</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+      {/* <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Registrarse</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

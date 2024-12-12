@@ -4,9 +4,9 @@ import useRegister from "@/hooks/useRegister";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const HomeScreen: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const { login, isLoading, error, token } = useLogin();
-  const { register, isLoadingRegister, errorRegister } = useRegister();
+  // const { register, isLoadingRegister, errorRegister } = useRegister();
 
   const handleLogin = async (values: {
     username: string;
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default LoginScreen;
