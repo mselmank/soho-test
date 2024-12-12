@@ -1,18 +1,25 @@
 import AuthForm from "@/components/AuthForm";
+import useLogin from "@/hooks/useLogin";
+import useRegister from "@/hooks/useRegister";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen: React.FC = () => {
-  const handleLogin = (values: { username: string; password: string }) => {
-    console.log("Username:", values.username);
-    console.log("Password:", values.password);
-    // Aquí iría la lógica para iniciar sesión
+  const { login, isLoading, error, token } = useLogin();
+  const { register, isLoadingRegister, errorRegister } = useRegister();
+
+  const handleLogin = async (values: {
+    username: string;
+    password: string;
+  }) => {
+    await login(values.username, values.password);
   };
 
-  const handleRegister = (values: { username: string; password: string }) => {
-    console.log("Username:", values.username);
-    console.log("Password:", values.password);
-    // Aquí iría la lógica para registrarse
+  const handleRegister = async (values: {
+    username: string;
+    password: string;
+  }) => {
+    await login(values.username, values.password);
   };
 
   return (
