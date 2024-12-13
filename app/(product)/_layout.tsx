@@ -13,7 +13,7 @@ export default function Layout() {
         },
       }}
     >
-      <Stack.Screen name="(login)" options={{}} />
+      <Stack.Screen name="(product)" options={{}} />
     </Stack>
   );
 }

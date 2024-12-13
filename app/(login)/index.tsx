@@ -1,16 +1,11 @@
 import AuthForm from "@/components/AuthForm";
 import useLogin from "@/hooks/useLogin";
-import useRegister from "@/hooks/useRegister";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as SecureStore from "expo-secure-store";
-import { useEffect, useState } from "react";
 
 const LoginScreen: React.FC = () => {
-  const { login, isLoading, error, token } = useLogin();
+  const { login, isLoading, error } = useLogin();
   const errorTitle = "Username o Password son incorrectos";
-
-  // const { register, isLoadingRegister, errorRegister } = useRegister();
 
   if (error) {
     <SafeAreaView>
@@ -19,17 +14,10 @@ const LoginScreen: React.FC = () => {
   }
   if (isLoading) {
     <View>
-      <Text>Cargando ...</Text>
+      <Text>Cargando...</Text>
     </View>;
   }
-  const getValueFor = async (key: string) => {
-    let result = await SecureStore.getItemAsync(key);
-    if (result) {
-      alert("🔐 Here's your value 🔐 \n" + result);
-    } else {
-      alert("No values stored under that key.");
-    }
-  };
+
   const handleLogin = async (values: {
     username: string;
     password: string;
@@ -43,9 +31,6 @@ const LoginScreen: React.FC = () => {
   }) => {
     await login(values.username, values.password);
   };
-  useEffect(() => {
-    getValueFor("token");
-  }, []);
 
   return (
     <SafeAreaView
@@ -81,5 +66,4 @@ const styles = StyleSheet.create({
     height: 180,
   },
 });
-
 export default LoginScreen;
