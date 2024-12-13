@@ -1,49 +1,33 @@
-import AuthForm from "@/components/AuthForm";
+import ProductCard from "@/components/ProductCard";
 import useLogin from "@/hooks/useLogin";
-import { Image, StyleSheet, Text, View } from "react-native";
+import useProducts from "@/hooks/useProduct";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProductScreen: React.FC = () => {
-  const { login, isLoading, error } = useLogin();
-  const errorTitle = "Username o Password son incorrectos";
+  const { products, isLoading, error } = useProducts();
 
+  const errorTitle = "Ops! Algo a pasado al traer tus productos ...";
+  const Loading = "Cargando ...";
   if (error) {
     <SafeAreaView>
       <Text>{errorTitle}</Text>
     </SafeAreaView>;
   }
   if (isLoading) {
-    <View>
-      <Text>Cargando...</Text>
-    </View>;
+    <SafeAreaView>
+      <Text>{Loading}</Text>
+    </SafeAreaView>;
   }
 
-  const handleLogin = async (values: {
-    username: string;
-    password: string;
-  }) => {
-    await login(values.username, values.password);
-  };
-
-  const handleRegister = async (values: {
-    username: string;
-    password: string;
-  }) => {
-    await login(values.username, values.password);
-  };
-
   return (
-    <SafeAreaView
-      style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
-    >
-      <View style={styles.logoContainer}>
-        <Image
-          source={require("../../assets/images/carrito-super.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View>
-      <View style={styles.container}></View>
+    <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
+      <FlatList
+        data={products}
+        renderItem={({ item }) => <ProductCard product={item} />}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.container}
+      />
     </SafeAreaView>
   );
 };
