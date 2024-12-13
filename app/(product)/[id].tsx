@@ -16,7 +16,6 @@ interface Product {
   description: string;
   category: string;
   image: string;
-  // ... otras propiedades del producto si las hay
 }
 
 const ProductDetailsScreen = () => {
@@ -80,7 +79,6 @@ const ProductDetailsScreen = () => {
       <Text style={styles.price}>${product.price}</Text>
       <Text style={styles.description}>{product.description}</Text>
       <Text style={styles.category}>Categoría: {product.category}</Text>
-      {/* ... puedes agregar más detalles del producto aquí ... */}
     </ScrollView>
   );
 };
