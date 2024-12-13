@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetch } from "expo/fetch";
+import * as SecureStore from "expo-secure-store";
 
 interface LoginResponse {
   token: string;
@@ -41,6 +42,7 @@ const useLogin = (): UseLoginResult => {
 
       const data = (await response.json()) as LoginResponse;
       setToken(data.token);
+      await SecureStore.setItemAsync("token", data.token);
     } catch (error: unknown) {
       console.error("Error al iniciar sesión:", error);
       if (error instanceof Error) {
