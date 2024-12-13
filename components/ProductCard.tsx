@@ -1,6 +1,11 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "expo-router";
+import {
+  router,
+  useLocalSearchParams,
+  useNavigation,
+  useRouter,
+} from "expo-router";
 
 interface Product {
   id: number;
@@ -14,10 +19,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const navigation = useNavigation();
-
   const handlePress = () => {
-    // navigation.push(`/(product)/${product.id}`); // Navega a la pantalla de detalles
+    router.push(`/(product)/${product.id}`);
   };
 
   return (

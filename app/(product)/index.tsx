@@ -1,7 +1,6 @@
 import ProductCard from "@/components/ProductCard";
-import useLogin from "@/hooks/useLogin";
 import useProducts from "@/hooks/useProduct";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProductScreen: React.FC = () => {
