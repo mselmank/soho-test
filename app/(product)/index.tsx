@@ -1,24 +1,33 @@
 import ProductCard from "@/components/ProductCard";
 import useProducts from "@/hooks/useProduct";
-import { FlatList, Image, StyleSheet, Text } from "react-native";
+import { Link } from "expo-router";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProductScreen: React.FC = () => {
   const { products, isLoading, error } = useProducts();
 
-  const errorTitle = "Ops! Algo a pasado al traer tus productos ...";
-  const Loading = "Cargando ...";
   if (error) {
-    <SafeAreaView>
-      <Text>{errorTitle}</Text>
-    </SafeAreaView>;
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
   }
   if (isLoading) {
-    <SafeAreaView>
-      <Text>{Loading}</Text>
-    </SafeAreaView>;
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
   }
-
   return (
     <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
       <FlatList
@@ -45,6 +54,25 @@ const styles = StyleSheet.create({
   logo: {
     width: 180,
     height: 180,
+  },
+  link: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  errorText: {
+    fontSize: 16,
+    color: "red",
   },
 });
 
