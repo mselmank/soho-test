@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import {
-  router,
-  useLocalSearchParams,
-  useNavigation,
-  useRouter,
-} from "expo-router";
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
+import { Link } from "expo-router";
 
 interface Product {
   id: number;
@@ -19,21 +21,24 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const handlePress = () => {
-    router.push(`/(product)/${product.id}`);
-  };
-
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.card}>
+    <SafeAreaView style={styles.card}>
       <Image source={{ uri: product.image }} style={styles.image} />
-      <View style={styles.info}>
+      <SafeAreaView style={styles.info}>
         <Text style={styles.title}>{product.title}</Text>
         <Text style={styles.price}>${product.price}</Text>
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
-          <Text style={styles.buttonText}>Ver detalles</Text>
+        <TouchableOpacity style={styles.button}>
+          <Link
+            href={{
+              pathname: "/(product)/[id]",
+              params: { id: `${product.id}` },
+            }}
+          >
+            <Text style={styles.buttonText}>Ver detalles</Text>
+          </Link>
         </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
+      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 
