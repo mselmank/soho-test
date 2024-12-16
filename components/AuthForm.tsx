@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  SafeAreaView,
 } from "react-native";
 
 interface AuthFormProps {
@@ -24,7 +25,7 @@ const LoginForm: React.FC<AuthFormProps> = ({ onSubmit, onRegister }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Nombre de usuario"
@@ -40,12 +41,12 @@ const LoginForm: React.FC<AuthFormProps> = ({ onSubmit, onRegister }) => {
         secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Iniciar sesión</Text>
+        <Text style={styles.buttonText}>Log In </Text>
       </TouchableOpacity>
       {/* <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Registrarse</Text>
       </TouchableOpacity> */}
-    </View>
+    </SafeAreaView>
   );
 };
 
